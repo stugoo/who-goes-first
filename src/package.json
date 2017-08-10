@@ -1,0 +1,23 @@
+{
+  "name": "who-goes-first",
+  "version": "1.0.0",
+  "description": "POC concept for installable PWA",
+  "main": "index.js",
+  "scripts": {
+    "start" : "http-server -p 8000 -o -S",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stugoo/who-goes-first.git"
+  },
+  "author": "Stugoo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stugoo/who-goes-first/issues"
+  },
+  "homepage": "https://github.com/stugoo/who-goes-first#readme",
+  "devDependencies": {
+    "http-server": "^0.10.0"
+  }
+}
