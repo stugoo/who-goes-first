@@ -6,7 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 
 #certs
-certs/
+*.pem
 
 # Runtime data
 pids
