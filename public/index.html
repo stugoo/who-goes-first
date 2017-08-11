@@ -14,10 +14,46 @@
         }
 
     </style>
+    
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Who Goes First">
+    <meta name="apple-mobile-web-app-title" content="Who Goes First">
+    <meta name="theme-color" content="#5bada55">
+    <meta name="msapplication-navbutton-color" content="#5bada55">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-starturl" content="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <link rel="stylesheet" type="text/css" href="/assets/css/styles.css" />
-    <script src="/assets/js/index.js"></script>
+    <script async src="/assets/js/index.js"></script>
 </head>
 <body>
-    <h1>Hello World</h1>
+    <header class="site-header">
+        <h1>Who goes first</h1>    
+    </header>
+    <main class="site-main">
+        <section class="page page-home">
+            <h2>Home</h2>
+            <button type="button" class="btn" data-decide>
+                click to find who goes first
+            </button>
+        </section>
+        <section class="page page-">
+            <h2>Result</h2>
+            <div data-descion role="alert">
+                <!--  -->
+            </div>
+        </section>
+        <section class="page page-settings">
+            <h2>Settings</h2>
+            <!--  -->
+        </section>
+    </main>
+    <footer class="site-footer">
+        footer!
+    </footer>
 </body>
 </html>

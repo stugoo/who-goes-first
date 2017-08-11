@@ -27,9 +27,11 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.es6'],
     alias: {
-        'core': path.join(__dirname, './src/core'),
-        'utils': path.join(__dirname, './src/utils'),
-        'plugins': path.join(__dirname, './src/plugins')
+        'core': path.join(__dirname, './dev/core'),
+        'datasets': path.join(__dirname, './dev/datasets'),
+        'decider': path.join(__dirname, './dev/decider'),
+        'utils': path.join(__dirname, './dev/utils'),
+        'plugins': path.join(__dirname, './dev/plugins')
     }
   },
 

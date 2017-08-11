@@ -1,0 +1,10 @@
+{
+  "name": "Who Goes First",
+  "short_name": "Who Goes First",
+  "description": "Decide without dice. Who needs to go first!",
+  "lang": "en-Gb",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#5bada55"
+}

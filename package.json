@@ -7,11 +7,11 @@
     "start": "http-server -p 8080 -o -S --cert ./certs/cert.pem --key ./certs/key.pem",
     "css": "node-sass ./dev/core/core.scss ./public/assets/css/styles.css && npm run css:autoprefixer",
     "css:autoprefixer": "postcss -u autoprefixer -r ./public/assets/css/*.css",
-    "css:watch": "onchange \"src/**/*.scss\" -- npm run css",
+    "css:watch": "onchange \"dev/**/*.scss\" -- npm run css",
     "js": "webpack --progress",
     "js:watch": "webpack --progress --watch",
     "js:dist": "SET NODE_ENV=production&&webpack  --progress --display-reasons --display-chunks",
-    "js:lint": "eslint src/**/*.js",
+    "js:lint": "eslint dev/**/*.js",
     "watch:all": "npm-run-all -p css:watch js:watch"
   },
   "repository": {
@@ -47,5 +47,8 @@
     "replace": "^0.3.0",
     "rimraf": "^2.6.1",
     "webpack": "^3.5.3"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1"
   }
 }

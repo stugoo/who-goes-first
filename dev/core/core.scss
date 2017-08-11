@@ -1,5 +1,52 @@
-$color : red;
-
 body {
-    background: $color;
+    background: #efefef;
+    padding: 50px;
+    font-family: Arial, Helvetica, Sans-serif;
+}
+
+[data-decide]  {
+
+}
+
+[data-descion]  {
+    color: #efefef;
+    background: #444;
+    padding: 20px;
+
+}
+
+
+.btn {
+    -webkit-font-smoothing: antialiased; //gets rid of bold on chrome <button>s :/
+    background-color: #efefef;
+    border: 1px solid #222;
+    border-radius: 0;
+    color: #222;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: normal;
+    line-height: 1;
+    overflow: hidden;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    touch-action: manipulation;
+    vertical-align: middle;
+    padding: 17px 15px;
+
+    &:hover,
+    &:focus {
+        background-color: rgba(#efefef, 0.6);
+        color: #222;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    &:active,
+    &.is-active {
+        color: #222;
+        cursor: pointer;
+        text-decoration: none;
+        background-color: #efefef;
+    }
 }
