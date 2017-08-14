@@ -1,17 +1,29 @@
 import $ from 'jquery';
-import { Decider } from 'decider';
+import routerInit  from 'router';
 
 function init () {
-
-    var decider = new Decider();
-
-    console.log(decider.data)
-
-    $('[data-decide]').on('click',function() {
-        $('[data-descion]').text(decider.getDescision());
-    })
+    routerInit();
 }
 
 $(document).ready(() => {
     init();
+
+
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator
+            .serviceWorker
+            .register('assets/js/index.js')
+            .then(function(registration) {
+                // Registration was successful
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }, function(err) {
+                // registration failed :(
+                console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+    }
+
+
 });

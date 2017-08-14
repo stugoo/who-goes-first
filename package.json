@@ -49,6 +49,7 @@
     "webpack": "^3.5.3"
   },
   "dependencies": {
-    "jquery": "^3.2.1"
+    "jquery": "^3.2.1",
+    "navigo": "^5.3.1"
   }
 }

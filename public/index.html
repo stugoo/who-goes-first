@@ -32,22 +32,27 @@
 </head>
 <body>
     <header class="site-header">
-        <h1>Who goes first</h1>    
+        <h1>Who goes first</h1>
+        <a href="home" data-navigo>home</a>    
+        <a href="settings" data-navigo>settings</a>    
     </header>
     <main class="site-main">
-        <section class="page page-home">
+        <section class="page" data-page="home">
             <h2>Home</h2>
-            <button type="button" class="btn" data-decide>
-                click to find who goes first
-            </button>
+            <a href="decide" data-navigo class="btn">
+                decide who goes first
+            </a>
         </section>
-        <section class="page page-">
+        <section class="page" data-page="descion">
             <h2>Result</h2>
-            <div data-descion role="alert">
+            <div data-decision role="alert">
                 <!--  -->
             </div>
+            <a href="decide" data-navigo class="btn">
+               decide again
+            </a>
         </section>
-        <section class="page page-settings">
+        <section class="page" data-page="settings">
             <h2>Settings</h2>
             <!--  -->
         </section>

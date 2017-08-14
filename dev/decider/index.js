@@ -1,15 +1,14 @@
+import $ from 'jquery';
 import * as responses from 'datasets/base';
-
-let activeIndex = 0;
 
 export class Decider {
     
     constructor(){
         this.desicionList = responses.BASE_RESPONSES;
-        this.descisionIndex = false;
-        this.currentDescision = false;
+        this.currentDecisionIndex = false;
+        this.currentDecision = false;
 
-        console.log(this);
+        this.set(0);
     }
 
     getRandomInt(min, max) {
@@ -18,18 +17,29 @@ export class Decider {
       return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
     }
 
-    getDescision() {
+    random() {
+        var currentIndex = this.currentDecisionIndex,
+            newIndex = this.getRandomInt(0, this.desicionList.length  );
 
-        activeIndex = this.getRandomInt(0, this.desicionList.length );
+        // @TODO create real random, never the same twice.
+        
+        this.currentDecisionIndex = newIndex;
 
-        if(activeIndex === this.descisionIndex) {
-            this.getDescision();
-            return;
-        }
+        return newIndex;
+    }
 
-        this.currentDescision = this.desicionList[activeIndex];
+    set(int) {        
+        this.currentDecisionIndex = parseInt(int, 10);
+    }
 
-        return this.currentDescision;
+    get() {
+        this.currentDecision = this.desicionList[this.currentDecisionIndex];
+        return this.currentDecision;
+    }
+
+    show() {
+        $('[data-decision]').text(this.get());
+        return 'yolo';
     }
 
 }

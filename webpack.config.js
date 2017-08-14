@@ -30,6 +30,7 @@ module.exports = {
         'core': path.join(__dirname, './dev/core'),
         'datasets': path.join(__dirname, './dev/datasets'),
         'decider': path.join(__dirname, './dev/decider'),
+        'router': path.join(__dirname, './dev/router'),
         'utils': path.join(__dirname, './dev/utils'),
         'plugins': path.join(__dirname, './dev/plugins')
     }
