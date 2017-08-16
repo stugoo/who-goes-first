@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+    <title>Hello yo!</title>
+    <style>
+
+        html {
+            background: paleturquoise;
+        }
+
+        body {
+            background: #fefefe;
+            color: #222;
+        }
+
+    </style>
+
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Who Goes First">
+    <meta name="apple-mobile-web-app-title" content="Who Goes First">
+    <meta name="theme-color" content="#5bada55">
+    <meta name="msapplication-navbutton-color" content="#5bada55">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-starturl" content="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/styles.css" />
+    <script async src="assets/js/index.js"></script>
+</head>
+<body>
+    <header class="site-header">
+        <h1>Who goes first</h1>
+        <a href="home" data-navigo>home</a>    
+        <a href="settings" data-navigo>settings</a>    
+    </header>
+    <main class="site-main">
+        <section class="page" data-page="home">
+            <h2>Home</h2>
+            <a href="decide" data-navigo class="btn">
+                decide who goes first
+            </a>
+        </section>
+        <section class="page" data-page="descion">
+            <h2>Result</h2>
+            <div data-decision role="alert">
+                <!--  -->
+            </div>
+            <a href="decide" data-navigo class="btn">
+               decide again
+            </a>
+        </section>
+        <section class="page" data-page="settings">
+            <h2>Settings</h2>
+            <!--  -->
+        </section>
+    </main>
+    <footer class="site-footer">
+        footer!
+    </footer>
+</body>
+</html>
