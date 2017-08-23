@@ -3,7 +3,7 @@
   "short_name": "Who Goes First?",
   "description": "Decide without dice. Who needs to go first!",
   "lang": "en-GB",
-  "start_url": "/",
+  "start_url": "/who-goes-first/public/",
   "display": "standalone",
   "orientation": "any",
   "theme_color": "#bada55",

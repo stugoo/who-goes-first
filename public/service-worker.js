@@ -28,6 +28,8 @@ function precache() {
     return cache.addAll([
       './',
       './index.html',
+      './who-goes-first/public/',
+      './who-goes-first/public/index.html',
       './assets/css/styles.css',
       './assets/js/index.js',
       './assets/img/homescreen.png',
