@@ -1,102 +1,60 @@
-/*
- Copyright 2015 Google Inc. All Rights Reserved.
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
- http://www.apache.org/licenses/LICENSE-2.0
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
-*/
+var CACHE = 'cache-and-update';
 
-'use strict';
+// On install, cache some resources.
 
-// Incrementing CACHE_VERSION will kick off the install event and force previously cached
-// resources to be cached again.
-const CACHE_VERSION = 2;
-let CURRENT_CACHES = {
-  offline: 'offline-v' + CACHE_VERSION
-};
-const OFFLINE_URL = 'index.html';
+ 
+self.addEventListener('install', function(evt) {
+  console.log('The service worker is being installed.');
+  // Ask the service worker to keep installing until the returning promise resolves.
+  evt.waitUntil(precache());
+});
 
-function createCacheBustedRequest(url) {
-  let request = new Request(url, {cache: 'reload'});
-  // See https://fetch.spec.whatwg.org/#concept-request-mode
-  // This is not yet supported in Chrome as of M48, so we need to explicitly check to see
-  // if the cache: 'reload' option had any effect.
-  if ('cache' in request) {
-    return request;
-  }
+// On fetch, use cache but update the entry with the latest contents from the server.
 
-  // If {cache: 'reload'} didn't have any effect, append a cache-busting URL parameter instead.
-  let bustedUrl = new URL(url, self.location.href);
-  bustedUrl.search += (bustedUrl.search ? '&' : '') + 'cachebust=' + Date.now();
-  return new Request(bustedUrl);
+ 
+self.addEventListener('fetch', function(evt) {
+  console.log('The service worker is serving the asset.', evt.request);
+  // You can use respondWith() to answer immediately, without waiting for the network response to reach the service worker…
+  evt.respondWith(fromCache(evt.request));
+  // …and waitUntil() to prevent the worker from being killed until the cache is updated.
+  evt.waitUntil(update(evt.request));
+});
+
+// Open a cache and use addAll() with an array of assets to add all of them to the cache. Return a promise resolving when all the assets are added.
+
+ 
+function precache() {
+  return caches.open(CACHE).then(function (cache) {
+    return cache.addAll([
+      './',
+      './index.html',
+      './assets/css/styles.css',
+      './assets/js/index.js',
+      './assets/img/homescreen.png',
+      './assets/img/homescreen_144x144.png',
+      './assets/img/homescreen_512x512.png'
+    ]);
+  });
 }
 
-self.addEventListener('install', event => {
-  event.waitUntil(
-    // We can't use cache.add() here, since we want OFFLINE_URL to be the cache key, but
-    // the actual URL we end up requesting might include a cache-busting parameter.
-    fetch(createCacheBustedRequest(OFFLINE_URL)).then(function(response) {
-      return caches.open(CURRENT_CACHES.offline).then(function(cache) {
-        return cache.put(OFFLINE_URL, response);
-      });
-    })
-  );
-});
+// Open the cache where the assets were stored and search for the requested resource. Notice that in case of no matching, the promise still resolves but it does with undefined as value.
 
-self.addEventListener('activate', event => {
-  // Delete all caches that aren't named in CURRENT_CACHES.
-  // While there is only one cache in this example, the same logic will handle the case where
-  // there are multiple versioned caches.
-  let expectedCacheNames = Object.keys(CURRENT_CACHES).map(function(key) {
-    return CURRENT_CACHES[key];
+ 
+function fromCache(request) {
+  return caches.open(CACHE).then(function (cache) {
+    return cache.match(request).then(function (matching) {
+      return matching || Promise.reject('no-match');
+    });
   });
+}
 
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (expectedCacheNames.indexOf(cacheName) === -1) {
-            // If this cache name isn't present in the array of "expected" cache names,
-            // then delete it.
-            console.log('Deleting out of date cache:', cacheName);
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
-});
+// Update consists in opening the cache, performing a network request and storing the new response data.
 
-self.addEventListener('fetch', event => {
-  // We only want to call event.respondWith() if this is a navigation request
-  // for an HTML page.
-  // request.mode of 'navigate' is unfortunately not supported in Chrome
-  // versions older than 49, so we need to include a less precise fallback,
-  // which checks for a GET request with an Accept: text/html header.
-  if (event.request.mode === 'navigate' ||
-      (event.request.method === 'GET' &&
-       event.request.headers.get('accept').includes('text/html'))) {
-    console.log('Handling fetch event for', event.request.url);
-    event.respondWith(
-      fetch(event.request).catch(error => {
-        // The catch is only triggered if fetch() throws an exception, which will most likely
-        // happen due to the server being unreachable.
-        // If fetch() returns a valid HTTP response with an response code in the 4xx or 5xx
-        // range, the catch() will NOT be called. If you need custom handling for 4xx or 5xx
-        // errors, see https://github.com/GoogleChrome/samples/tree/gh-pages/service-worker/fallback-response
-        console.log('Fetch failed; returning offline page instead.', error);
-        return caches.match(OFFLINE_URL);
-      })
-    );
-  }
-
-  // If our if() condition is false, then this fetch handler won't intercept the request.
-  // If there are any other fetch handlers registered, they will get a chance to call
-  // event.respondWith(). If no fetch handlers call event.respondWith(), the request will be
-  // handled by the browser as if there were no service worker involvement.
-});
+ 
+function update(request) {
+  return caches.open(CACHE).then(function (cache) {
+    return fetch(request).then(function (response) {
+      return cache.put(request, response);
+    });
+  });
+}

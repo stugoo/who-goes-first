@@ -1,10 +1,28 @@
 {
-  "name": "Who Goes First",
-  "short_name": "Who Goes First",
+  "name": "Who Goes First?",
+  "short_name": "Who Goes First?",
   "description": "Decide without dice. Who needs to go first!",
-  "lang": "en-Gb",
+  "lang": "en-GB",
   "start_url": "/",
   "display": "standalone",
   "orientation": "any",
-  "theme_color": "#bada55"
+  "theme_color": "#bada55",
+  "background_color": "#bada55",
+  "icons": [
+    {
+      "src": "./assets/img/homescreen.png",
+      "sizes": "192x192",
+      "type": "png"
+    },
+    {
+      "src": "./assets/img/homescreen_144x144.png",
+      "sizes": "144x144",
+      "type": "png"
+    },
+    {
+      "src": "./assets/img/homescreen_512x512.png",
+      "sizes": "512x512",
+      "type": "png"
+    }
+  ]
 }
