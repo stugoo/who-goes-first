@@ -1,10 +1,10 @@
 var CACHE = 'cache-and-update';
 
 // On install, cache some resources.
-
- 
 self.addEventListener('install', function(evt) {
   console.log('The service worker is being installed.');
+  console.log('installing.', evt);
+  
   // Ask the service worker to keep installing until the returning promise resolves.
   evt.waitUntil(precache());
 });
@@ -26,7 +26,7 @@ self.addEventListener('fetch', function(evt) {
 function precache() {
   return caches.open(CACHE).then(function (cache) {
     return cache.addAll([
-      './',
+      '.',
       './index.html',
       './assets/css/styles.css',
       './assets/js/index.js',
